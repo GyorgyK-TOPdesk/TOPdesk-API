@@ -1,0 +1,654 @@
+{
+ "version": "0.0.1",
+ "templates": [
+  {
+   "metadata": {
+    "templateId": "",
+    "templateName": "Monitor",
+    "archived": false,
+    "template": {
+     "tabs": [
+      {
+       "resourceKey": "tas.reference.general",
+       "columns": [
+        {
+         "size": "1-2",
+         "widgets": [
+          {
+           "widgetType": "generalWidget",
+           "title": "Object ID",
+           "resourceKey": "tas.reference.general"
+          },
+          {
+           "widgetType": "fieldSetWidget",
+           "title": "Management information",
+           "resourceKey": "assetmgmt.widget.fieldset.title",
+           "fields": [
+            {
+             "$ref": "fields/supplier"
+            },
+            {
+             "$ref": "fields/brand"
+            },
+            {
+             "$ref": "fields/model"
+            }
+           ]
+          },
+          {
+           "widgetType": "fieldSetWidget",
+           "title": "Financial",
+           "resourceKey": "assetmgmt.widget.fieldset.title",
+           "fields": [
+            {
+             "$ref": "fields/cost-centre"
+            },
+            {
+             "$ref": "fields/purchase-date"
+            },
+            {
+             "$ref": "fields/purchase-amount"
+            },
+            {
+             "$ref": "fields/depreciation-start-date"
+            },
+            {
+             "$ref": "fields/warranty-expiration-date"
+            }
+           ]
+          },
+          {
+           "widgetType": "historyWidget",
+           "title": null,
+           "resourceKey": "assetmgmt.widget.history.title"
+          }
+         ]
+        },
+        {
+         "size": "1-2",
+         "widgets": [
+          {
+           "widgetType": "relationshipWidget",
+           "title": null,
+           "resourceKey": "assetmgmt.widget.relationship.title"
+          },
+          {
+           "widgetType": "assignmentWidget",
+           "title": null,
+           "resourceKey": "assetmgmt.widget.assignment.title"
+          },
+          {
+           "widgetType": "reservationsWidget",
+           "title": null,
+           "resourceKey": "assetmgmt.widget.reservations.title"
+          },
+          {
+           "widgetType": "documentWidget",
+           "title": null,
+           "resourceKey": "assetmgmt.widget.document.title"
+          }
+         ]
+        }
+       ]
+      }
+     ],
+     "required": [],
+     "summary": [
+      "specification"
+     ],
+     "capabilities": {
+      "providedCapabilities": []
+     }
+    },
+    "resourceCategory": "asset",
+    "icon": {
+     "id": "flat_screen",
+     "name": "Flat screen",
+     "url16": "/icons/flat_screen/16",
+     "url32": "/icons/flat_screen/32"
+    },
+    "autoNumbering": {
+     "enabled": true,
+     "prefix": "SCH-",
+     "minLength": 5,
+     "startIndex": 1
+    },
+    "settings": {
+     "visibleOnSSP": true
+    }
+   }
+  }
+ ],
+ "fields": [
+  {
+   "fieldName": "name",
+   "displayName": "Asset ID",
+   "properties": {
+    "multilineSupport": false,
+    "maxLength": 60
+   },
+   "fieldType": "textField",
+   "maxLength": 60
+  },
+  {
+   "fieldName": "specification",
+   "displayName": "Specification",
+   "properties": {
+    "multilineSupport": null,
+    "maxLength": 60
+   },
+   "fieldType": "textField",
+   "maxLength": 60
+  },
+  {
+   "fieldName": "supplier",
+   "displayName": "Supplier",
+   "properties": {
+    "ownOptions": false,
+    "usersCanAddOptions": false,
+    "url": "dataSets?type=supplier",
+    "saveUrl": null,
+    "unid": null,
+    "templateId": null,
+    "dataset": "supplier"
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "brand",
+   "displayName": "Brand",
+   "properties": {
+    "ownOptions": true,
+    "usersCanAddOptions": true,
+    "url": "assets?templateId=",
+    "saveUrl": "assets/updateDataSet?templateId=",
+    "unid": "",
+    "templateId": "",
+    "dataset": ""
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "model",
+   "displayName": "Model",
+   "properties": {
+    "ownOptions": true,
+    "usersCanAddOptions": true,
+    "url": "assets?templateId=",
+    "saveUrl": "assets/updateDataSet?templateId=",
+    "unid": "",
+    "templateId": "",
+    "dataset": ""
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "cost-centre",
+   "displayName": "Cost centre",
+   "properties": {
+    "ownOptions": true,
+    "usersCanAddOptions": false,
+    "url": "assets?templateId=",
+    "saveUrl": "assets/updateDataSet?templateId=",
+    "unid": "",
+    "templateId": "",
+    "dataset": ""
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "purchase-date",
+   "displayName": "Purchase date",
+   "properties": {
+    "showTime": false
+   },
+   "fieldType": "dateTimeField"
+  },
+  {
+   "fieldName": "purchase-amount",
+   "displayName": "Purchase amount",
+   "properties": {
+    "fractionals": 2,
+    "prefix": {
+     "setting": "algemeen.bedragprefix",
+     "resourceKey": null
+    },
+    "postfix": {
+     "setting": "algemeen.bedragpostfix",
+     "resourceKey": null
+    },
+    "minValue": null,
+    "maxValue": null
+   },
+   "fieldType": "numberField",
+   "expectedNumberOfFractionals": 2
+  },
+  {
+   "fieldName": "depreciation-start-date",
+   "displayName": "Depreciation start date",
+   "properties": {
+    "showTime": false
+   },
+   "fieldType": "dateTimeField"
+  },
+  {
+   "fieldName": "warranty-expiration-date",
+   "displayName": "Warranty expiration date",
+   "properties": {
+    "showTime": false
+   },
+   "fieldType": "dateTimeField"
+  },
+  {
+   "fieldName": "@@reservation_reservable",
+   "resourceKey": "assetmgmt.reservations.reservable",
+   "properties": {},
+   "fieldType": "checkboxField"
+  },
+  {
+   "fieldName": "@@reservation_issuable",
+   "resourceKey": "assetmgmt.reservations.issuable",
+   "properties": {},
+   "fieldType": "checkboxField"
+  },
+  {
+   "fieldName": "@@reservation_reservable_ssp",
+   "resourceKey": "assetmgmt.reservations.reservable_ssp",
+   "properties": {},
+   "fieldType": "checkboxField"
+  },
+  {
+   "fieldName": "@@reservation_visible_ssp",
+   "resourceKey": "assetmgmt.reservations.visible_ssp",
+   "properties": {},
+   "fieldType": "checkboxField"
+  },
+  {
+   "fieldName": "@@reservation_restrict_person_group",
+   "resourceKey": "assetmgmt.reservations.restrict_person_group",
+   "properties": {
+    "ownOptions": false,
+    "usersCanAddOptions": false,
+    "url": "dataSets?type=persongroup",
+    "saveUrl": null,
+    "unid": null,
+    "templateId": null,
+    "dataset": "persongroup"
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "@@reservation_block_time_between_reservations",
+   "resourceKey": "assetmgmt.reservations.block_time_between_reservations",
+   "properties": {
+    "fractionals": 0,
+    "prefix": null,
+    "postfix": {
+     "setting": null,
+     "resourceKey": "assetmgmt.reservations.block_time_between_reservations_minutes"
+    },
+    "minValue": 0,
+    "maxValue": 2147483647
+   },
+   "fieldType": "numberField",
+   "expectedNumberOfFractionals": 0
+  },
+  {
+   "fieldName": "@@reservation_requires_approval",
+   "resourceKey": "assetmgmt.reservations.requires_approval",
+   "properties": {},
+   "fieldType": "checkboxField"
+  },
+  {
+   "fieldName": "@@reservation_available_at_location",
+   "resourceKey": "assetmgmt.reservations.available_at_location",
+   "properties": {},
+   "fieldType": "checkboxField"
+  },
+  {
+   "fieldName": "@@reservation_normal_rate",
+   "resourceKey": "assetmgmt.reservations.normal_rate",
+   "properties": {
+    "fractionals": 2,
+    "prefix": {
+     "setting": "algemeen.bedragprefix",
+     "resourceKey": null
+    },
+    "postfix": {
+     "setting": "algemeen.bedragpostfix",
+     "resourceKey": null
+    },
+    "minValue": 0,
+    "maxValue": 922337203685475
+   },
+   "fieldType": "numberField",
+   "expectedNumberOfFractionals": 2
+  },
+  {
+   "fieldName": "@@reservation_high_rate",
+   "resourceKey": "assetmgmt.reservations.high_rate",
+   "properties": {
+    "fractionals": 2,
+    "prefix": {
+     "setting": "algemeen.bedragprefix",
+     "resourceKey": null
+    },
+    "postfix": {
+     "setting": "algemeen.bedragpostfix",
+     "resourceKey": null
+    },
+    "minValue": 0,
+    "maxValue": 922337203685475
+   },
+   "fieldType": "numberField",
+   "expectedNumberOfFractionals": 2
+  },
+  {
+   "fieldName": "@@reservation_deposit_per_reservation",
+   "resourceKey": "assetmgmt.reservations.deposit_per_reservation",
+   "properties": {
+    "fractionals": 2,
+    "prefix": {
+     "setting": "algemeen.bedragprefix",
+     "resourceKey": null
+    },
+    "postfix": {
+     "setting": "algemeen.bedragpostfix",
+     "resourceKey": null
+    },
+    "minValue": 0,
+    "maxValue": 922337203685475
+   },
+   "fieldType": "numberField",
+   "expectedNumberOfFractionals": 2
+  },
+  {
+   "fieldName": "@@reservation_accounting_unit",
+   "resourceKey": "assetmgmt.reservations.accounting_unit",
+   "properties": {
+    "ownOptions": false,
+    "usersCanAddOptions": false,
+    "url": "dataSets?type=accountingunit",
+    "saveUrl": null,
+    "unid": null,
+    "templateId": null,
+    "dataset": "accountingunit"
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "@@reservation_brief_description",
+   "resourceKey": "assetmgmt.reservations.brief_description",
+   "properties": {
+    "multilineSupport": false,
+    "maxLength": 100
+   },
+   "fieldType": "textField",
+   "maxLength": 100
+  },
+  {
+   "fieldName": "@@reservation_terms_of_reservation",
+   "resourceKey": "assetmgmt.reservations.terms_of_reservation",
+   "properties": {
+    "multilineSupport": true,
+    "maxLength": 50000
+   },
+   "fieldType": "textField",
+   "maxLength": 50000
+  },
+  {
+   "fieldName": "@@reservation_reservable_during_service_window",
+   "resourceKey": "assetmgmt.reservations.service_window_applied_to",
+   "properties": {
+    "ownOptions": false,
+    "usersCanAddOptions": false,
+    "url": "dataSets?type=reservableduringservicewindow",
+    "saveUrl": null,
+    "unid": null,
+    "templateId": null,
+    "dataset": "reservableduringservicewindow"
+   },
+   "fieldType": "suggestField"
+  },
+  {
+   "fieldName": "@@reservation_service_window",
+   "resourceKey": "assetmgmt.reservations.restrict_to_service_window",
+   "properties": {
+    "ownOptions": false,
+    "usersCanAddOptions": false,
+    "url": "dataSets?type=servicewindow",
+    "saveUrl": null,
+    "unid": null,
+    "templateId": null,
+    "dataset": "servicewindow"
+   },
+   "fieldType": "suggestField"
+  }
+ ],
+ "linkTypes": [],
+ "suggestFieldOptions": [
+  {
+   "fieldName": "brand",
+   "fieldOptions": [
+    {
+     "text": "Apple",
+     "archived": false
+    },
+    {
+     "text": "Casio",
+     "archived": false
+    },
+    {
+     "text": "Cisco",
+     "archived": false
+    },
+    {
+     "text": "Dell",
+     "archived": false
+    },
+    {
+     "text": "Douwe Egberts",
+     "archived": false
+    },
+    {
+     "text": "Dymo",
+     "archived": false
+    },
+    {
+     "text": "Gazelle",
+     "archived": false
+    },
+    {
+     "text": "Gispen",
+     "archived": false
+    },
+    {
+     "text": "Ibiza Sound",
+     "archived": false
+    },
+    {
+     "text": "Kia",
+     "archived": false
+    },
+    {
+     "text": "Kone",
+     "archived": false
+    },
+    {
+     "text": "Logitech",
+     "archived": false
+    },
+    {
+     "text": "Mercedes",
+     "archived": false
+    },
+    {
+     "text": "Optoma",
+     "archived": false
+    },
+    {
+     "text": "Pelican",
+     "archived": false
+    },
+    {
+     "text": "Philips",
+     "archived": false
+    },
+    {
+     "text": "Quooker",
+     "archived": false
+    },
+    {
+     "text": "Renault",
+     "archived": false
+    },
+    {
+     "text": "Ricoh",
+     "archived": false
+    },
+    {
+     "text": "Samsung",
+     "archived": false
+    },
+    {
+     "text": "Segway",
+     "archived": false
+    },
+    {
+     "text": "Siemens",
+     "archived": false
+    },
+    {
+     "text": "TP Link",
+     "archived": false
+    },
+    {
+     "text": "UniFi",
+     "archived": false
+    },
+    {
+     "text": "Van Dorp",
+     "archived": false
+    },
+    {
+     "text": "Vendo",
+     "archived": false
+    },
+    {
+     "text": "Vespa",
+     "archived": false
+    },
+    {
+     "text": "Volkswagen",
+     "archived": false
+    }
+   ]
+  },
+  {
+   "fieldName": "model",
+   "fieldOptions": [
+    {
+     "text": "Apple iPad Pro 12.9-inch",
+     "archived": false
+    },
+    {
+     "text": "Clio",
+     "archived": false
+    },
+    {
+     "text": "Dell Latitude 3400 44PV4 3Y",
+     "archived": false
+    },
+    {
+     "text": "DELL P2418D - 24'' QHD Monitor",
+     "archived": false
+    },
+    {
+     "text": "Dymo LabelWriter 4XL",
+     "archived": false
+    },
+    {
+     "text": "Flex",
+     "archived": false
+    },
+    {
+     "text": "Gallery 400 Freshbrew",
+     "archived": false
+    },
+    {
+     "text": "Golf",
+     "archived": false
+    },
+    {
+     "text": "Logitech Tap FOR Microsoft Teams",
+     "archived": false
+    },
+    {
+     "text": "Niro Hybrid",
+     "archived": false
+    },
+    {
+     "text": "Optoma H184X",
+     "archived": false
+    },
+    {
+     "text": "Philips Brilliance Monitor BDM4350UC",
+     "archived": false
+    },
+    {
+     "text": "PKG12A-SET",
+     "archived": false
+    },
+    {
+     "text": "Ricoh IM C6000",
+     "archived": false
+    },
+    {
+     "text": "Ricoh IM C6001",
+     "archived": false
+    },
+    {
+     "text": "SAMSUNG UE32N5300",
+     "archived": false
+    },
+    {
+     "text": "SE-C450",
+     "archived": false
+    },
+    {
+     "text": "SIEMENS SN636X10IE",
+     "archived": false
+    },
+    {
+     "text": "Sprinter",
+     "archived": false
+    },
+    {
+     "text": "Vendo 470",
+     "archived": false
+    },
+    {
+     "text": "Zia II",
+     "archived": false
+    }
+   ]
+  },
+  {
+   "fieldName": "cost-centre",
+   "fieldOptions": [
+    {
+     "text": "FM",
+     "archived": false
+    },
+    {
+     "text": "HR",
+     "archived": false
+    },
+    {
+     "text": "IT",
+     "archived": false
+    }
+   ]
+  }
+ ]
+}
