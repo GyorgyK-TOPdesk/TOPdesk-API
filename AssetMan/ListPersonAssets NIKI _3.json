@@ -1,0 +1,94 @@
+{
+    "formatVersion": "2.17",
+    "exportDate": 1719401403347,
+    "action": {
+        "module": "tas_persoon1",
+        "name": "ListPersonAssets NIKI <3",
+        "description": "",
+        "configuration": {
+            "variables": [
+                {
+                    "name": "topdesk_user",
+                    "value": "KISSNIKOLETT"
+                },
+                {
+                    "name": "topdesk_pw",
+                    "value": "l7t4s-3wzh6-gb7up-jvgnt-luu2m"
+                },
+                {
+                    "name": "TOPdesk_url",
+                    "value": "https://hungary-test.topdesk.net"
+                }
+            ],
+            "mappingDefinitions": [],
+            "steps": [
+                {
+                    "type": "HTTP_REQUEST",
+                    "executionCondition": "ONLY_WHEN_PREVIOUS_SUCCEEDED",
+                    "customExecutionCondition": "",
+                    "name": "get_assets_of_person",
+                    "method": "GET",
+                    "url": "${_variables.TOPdesk_url?no_esc}/tas/api/assetmgmt/assets?linkedTo=person/${_card[\"unid\"]!}&archived=false&fields=name,type,@assignments,sorozatszam",
+                    "headers": [
+                        {
+                            "name": "Authorization",
+                            "value": "Basic  ${_base64(_variables.topdesk_user + \":\" + _variables.topdesk_pw)}"
+                        }
+                    ],
+                    "escapeBodyValues": false,
+                    "bodyType": "FREEMARKER_TEMPLATE",
+                    "logRequestBody": true,
+                    "logResponseBody": true,
+                    "authenticationType": "NONE",
+                    "authenticationKey": null,
+                    "body": ""
+                },
+                {
+                    "type": "GENERATE_DOCUMENT",
+                    "executionCondition": "ONLY_WHEN_PREVIOUS_SUCCEEDED",
+                    "customExecutionCondition": "",
+                    "filename": "person-assets",
+                    "stepName": "step2",
+                    "format": "A4",
+                    "width": "21cm",
+                    "height": "29.7cm",
+                    "margin": {
+                        "top": "1in",
+                        "bottom": "1in",
+                        "left": "1in",
+                        "right": "1in"
+                    },
+                    "fileTemplate": "<html>\n<head>\n\t<title></title>\n</head>\n<body><br />\n<br />\nVissza szolg&aacute;ltatand&oacute; eszk&ouml;z&ouml;k:<br />\n<br />\n<#list _responses[\"get_assets_of_person\"][\"body\"].dataSet as x><br />\n${x.name} - ${x.type} <#if (x.@assignments.persons[0].person.name)!?has_content>${x.@assignments.persons[0].person.name!\"Nincs\"}<#else>nincs</#if><br />\n</#list><br />\n<br />\n<br />\n<br />\n&nbsp;</body>\n</html>\n",
+                    "linkToCard": false
+                },
+                {
+                    "type": "EMAIL",
+                    "executionCondition": "ONLY_WHEN_PREVIOUS_SUCCEEDED",
+                    "customExecutionCondition": "",
+                    "from": [
+                        {
+                            "type": "FREEMARKER",
+                            "value": "tdhu-test@outlook.com"
+                        }
+                    ],
+                    "to": [
+                        {
+                            "type": "FREEMARKER",
+                            "value": "n.kiss@topdesk.com"
+                        }
+                    ],
+                    "cc": [],
+                    "bcc": [],
+                    "replyTo": [],
+                    "subject": "Eszköz lista",
+                    "body": "<html>\n<head>\n\t<title></title>\n</head>\n<body>SIKERŰŰŰŰŰLT + itt nincs az egyik kit&ouml;ltdve &eacute;s ott ki&iacute;rta a pdf h nincs ;)</body>\n</html>\n",
+                    "suppressAutomaticReplies": false,
+                    "generatedAttachments": [
+                        "step2"
+                    ],
+                    "linkToCard": false
+                }
+            ]
+        }
+    }
+}
